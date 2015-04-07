@@ -1,0 +1,27 @@
+link(rel="stylesheet",href="bower/bootstrap/dist/css/bootstrap.css")
+script(type = 'text/javascript', src = 'bower/angular/angular.js')
+script(type = 'text/javascript', src = 'bower/angular-resource/angular-resource.min.js')
+script(type = 'text/javascript', src = 'app/app.js')
+//link(href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css", rel="stylesheet")
+body(ng-app='app')
+     .container
+         h1 .:Atividades na ESFF:.
+         div(ng-controller='testeCtlr')
+            form(ng-submit="submit()")
+                .form-group
+                    input.form-control(placeholder="Atividade" ng-model="nome")
+                .form-group
+                    input.form-control(placeholder="Descricao" ng-model="descricao")
+                .form-group
+                    button.btn.btn-primary(type="submit") Publicar
+             table.table.table-stripped.table-hover.table-bordered
+                tr(ng-repeat="atividade in atividades")
+                    td.col-md-5
+                        h4(ng-hide="editedPost==atividade") {{atividade.nome}}
+                        input.form-control(placeholder="Atividade" ng-model="atividade.nome" ng-if="editedPost==atividade")
+                        p(ng-hide="editedPost==atividade") {{atividade.descricao}}
+                        input.form-control(placeholder="Descrição" ng-model="atividade.descricao" ng-if="editedPost==atividade")
+                    td.col-md-2
+                        button.btn.btn-primary(ng-click="editPost(atividade)" ng-hide="editedPost==atividade") Editar
+                        button.btn.btn-sucess(ng-click="updatePost(atividade)" ng-if="editedPost==atividade") Gravar
+                        button.btn.btn-danger(ng-click="deletePost(atividade)") Apagar
