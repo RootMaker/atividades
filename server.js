@@ -13,7 +13,7 @@ app.set('view engine','jade');
 app.use(express.static(__dirname + '/public'));
 app.get('/api/atividades',function(req, res) {
     Post.find({}).exec(function(error,collection){
-        res.send(collection);
+        res.jsonp(collection);
     })
 });
 app.get('*', function(req,res){
